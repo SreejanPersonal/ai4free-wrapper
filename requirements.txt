@@ -1,0 +1,24 @@
+# Web framework and extensions
+Flask==3.1.0
+flask-cors==4.0.1          # For handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible
+Flask-Redis==0.4.0         # For using the redis extension (imported as flask_redis)
+Flask-SQLAlchemy==3.1.1      # SQLAlchemy integration with Flask
+
+# Data validation and environment management
+marshmallow==3.26.1
+python-dotenv==1.0.1
+
+# HTTP client and API helper libraries
+requests==2.32.3
+openai==1.61.1
+
+# Database ORM and adapter
+SQLAlchemy==2.0.29
+psycopg2-binary==2.9.6       # PostgreSQL driver for production database connectivity
+
+# Utility libraries
+tiktoken
+
+# Production WSGI server
+gunicorn==23.0.0
+gevent

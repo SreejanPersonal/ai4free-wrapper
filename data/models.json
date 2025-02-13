@@ -1,0 +1,68 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "Provider-1/DeepSeek-R1",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Deepseek Model",
+      "owner_cost_per_million_tokens": 2.00
+    },
+    {
+      "id": "Provider-2/gpt-4o",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "GPT 4o Model",
+      "owner_cost_per_million_tokens": 5.00
+    },
+    {
+      "id": "Provider-3/DeepSeek-R1",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 3",
+      "permission": [],
+      "description": "Deepseek Model provided by the official API",
+      "owner_cost_per_million_tokens": 2.00
+    },
+    {
+      "id": "Provider-3/o3-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "OpenAI",
+      "permission": [],
+      "description": "OpenAI's o3-mini is a cost-effective and fast reasoning model...",
+      "owner_cost_per_million_tokens": 4.40
+    },
+    {
+      "id": "Provider-4/DeepSeek-R1",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider4",
+      "permission": [],
+      "description": "DeepSeek-R1 Model",
+      "owner_cost_per_million_tokens": 3.50
+    },
+    {
+      "id": "Provider-4/DeepSeek-R1-Distill-Llama-70B",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider4",
+      "permission": [],
+      "description": "DeepSeek-R1-Distill-Llama-70B 70b (Llama) Model",
+      "owner_cost_per_million_tokens": 2.00
+    },
+    {
+      "id": "Provider-4/DeepSeekV3",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider4",
+      "permission": [],
+      "description": "DeepSeek-V3 Model",
+      "owner_cost_per_million_tokens": 1.50
+    }
+  ]
+}
