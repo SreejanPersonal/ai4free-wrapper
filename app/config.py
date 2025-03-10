@@ -58,14 +58,29 @@ class Config:
 
     MODEL_SPECIFIC_CONFIG = {
         "Provider-1/DeepSeek-R1": {"max_input_tokens": 32768, "max_output_tokens": 8192},
+
         "Provider-2/gpt-4o": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+
         "Provider-3/DeepSeek-R1": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-3/o3-mini": {"max_input_tokens": 16384, "max_output_tokens": 4096},
+
         "Provider-4/DeepSeek-R1": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-4/DeepSeek-R1-Distill-Llama-70B": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-4/DeepSeekV3": {"max_input_tokens": 32768, "max_output_tokens": 8192},
+        
+        "Provider-5/gpt-4o-mini": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/gpt-4o": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/o1-mini": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/qwen-2.5-coder-32b": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/llama-3.3-70b": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/deepseek-v3": {"max_input_tokens": 32768, "max_output_tokens": 8192},
+        "Provider-5/claude-3.7-sonnet": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/deepseek-r1-distill-qwen-32b": {"max_input_tokens": 32768, "max_output_tokens": 8192},
+        "Provider-5/deepseek-r1": {"max_input_tokens": 32768, "max_output_tokens": 8192},
+        "Provider-5/deepseek-r1-llama-70b": {"max_input_tokens": 32768, "max_output_tokens": 8192},
+        "Provider-5/gemini-2.0-flash": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/gemini-2.0-flash-thinking": {"max_input_tokens": 8192, "max_output_tokens": 4096},
     }
-
     @classmethod
     def get_model_config(cls, model_id):
         return cls.MODEL_SPECIFIC_CONFIG.get(model_id, {

@@ -8,7 +8,8 @@ from .provider_1 import Provider1
 from .provider_2 import Provider2
 from .provider_3 import Provider3
 from .provider_4 import Provider4
+from .provider_5 import Provider5 
 from .provider_manager import ProviderManager
 
 
-__all__ = ["BaseProvider", "Provider1", "Provider2", "Provider3", "Provider4", "ProviderManager"]
+__all__ = ["BaseProvider", "Provider1", "Provider2", "Provider3", "Provider4", "Provider5", "ProviderManager"] 
