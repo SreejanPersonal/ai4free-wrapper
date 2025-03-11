@@ -63,6 +63,114 @@
       "permission": [],
       "description": "DeepSeek-V3 Model",
       "owner_cost_per_million_tokens": 1.50
+    },
+    {
+      "id": "Provider-5/gpt-4o-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "GPT-4o-mini model",
+      "owner_cost_per_million_tokens": 0.60
+    },
+    {
+      "id": "Provider-5/gpt-4o",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "GPT-4o model",
+      "owner_cost_per_million_tokens": 10.00
+    },
+    {
+      "id": "Provider-5/o1-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "o1-mini model",
+      "owner_cost_per_million_tokens": 4.4
+    },
+    {
+      "id": "Provider-5/qwen-2.5-coder-32b",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Qwen 2.5 Coder 32B model",
+      "owner_cost_per_million_tokens": 0.80
+    },
+    {
+      "id": "Provider-5/llama-3.3-70b",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Llama 3.3 70B model",
+      "owner_cost_per_million_tokens": 0.40
+    },
+    {
+      "id": "Provider-5/deepseek-v3",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "DeepSeek V3 model",
+      "owner_cost_per_million_tokens": 1.30
+    },
+    {
+      "id": "Provider-5/claude-3.7-sonnet",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Claude 3.5 Haiku model",
+      "owner_cost_per_million_tokens": 15.00
+    },
+    {
+      "id": "Provider-5/deepseek-r1-distill-qwen-32b",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "DeepSeek R1 Distill Qwen 32B model",
+      "owner_cost_per_million_tokens": 0.60
+    },
+    {
+      "id": "Provider-5/deepseek-r1",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "DeepSeek R1 model",
+      "owner_cost_per_million_tokens": 3.0
+    },
+    {
+      "id": "Provider-5/deepseek-r1-llama-70b",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "DeepSeek R1 Llama 70B model",
+      "owner_cost_per_million_tokens": 0.75
+    },
+    {
+      "id": "Provider-5/gemini-2.0-flash",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Gemini 2.0 Flash model",
+      "owner_cost_per_million_tokens": 0.60
+    },
+    {
+      "id": "Provider-5/gemini-2.0-flash-thinking",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Gemini 2.0 Flash Thinking model",
+      "owner_cost_per_million_tokens": 0.60
     }
   ]
 }

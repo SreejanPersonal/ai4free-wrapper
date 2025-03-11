@@ -4,6 +4,7 @@ from .provider_1 import Provider1
 from .provider_2 import Provider2
 from .provider_3 import Provider3
 from .provider_4 import Provider4
+from .provider_5 import Provider5
 from typing import Dict, List, Optional
 import logging
 from . import BaseProvider
@@ -32,6 +33,7 @@ class ProviderManager:
         self.register_provider("provider-2", Provider2())
         self.register_provider("provider-3", Provider3())
         self.register_provider("provider-4", Provider4())
+        self.register_provider("provider-5", Provider5())
 
     def select_provider(self, model_id: str) -> Optional[BaseProvider]:
         """
