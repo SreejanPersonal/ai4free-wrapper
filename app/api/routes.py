@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, Response, current_app
 from .controllers import (
     handle_chat_completion,
+    handle_image_generation,
     list_models,
     create_api_key,
     get_usage,
@@ -29,6 +30,19 @@ def chat_completions():
     result = handle_chat_completion(data, request)
     if isinstance(result, Response):
         return result
+    if isinstance(result, tuple):
+        response_data, status = result
+        return jsonify(response_data), status
+    else:
+        return jsonify(result), result.get("status_code", 200)
+    
+@api_blueprint.route('/images/generations', methods=['POST'])
+@requires_api_key
+@rate_limit(limit_type="image")  # We'll modify the rate_limit decorator to support different limit types
+def image_generations():
+    """Handles image generation requests."""
+    data = request.get_json()
+    result = handle_image_generation(data, request)
     if isinstance(result, tuple):
         response_data, status = result
         return jsonify(response_data), status

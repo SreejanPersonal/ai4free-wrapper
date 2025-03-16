@@ -4,7 +4,7 @@ from flask import jsonify, current_app
 from marshmallow import ValidationError
 import logging
 from ..providers.provider_manager import ProviderManager
-from .schemas import ChatCompletionRequestSchema, ModelListResponseSchema
+from .schemas import ChatCompletionRequestSchema, ModelListResponseSchema, ImageGenerationRequestSchema
 from ..services.api_key_service import get_api_key_from_request, create_new_api_key, get_api_key_record
 from ..services.usage_service import record_request, record_failed_request
 from ..utils.token_counter import count_tokens
@@ -101,6 +101,42 @@ def handle_chat_completion(data, request):
         record_failed_request(user_id, api_key, model_id)
         return {"error": str(e), "status_code": 500}
 
+def handle_image_generation(data, request):
+    """Handles an image generation request."""
+    # 1. Validate the request data
+    schema = ImageGenerationRequestSchema()
+    try:
+        validated_data = schema.load(data)
+    except ValidationError as err:
+        return {"error": err.messages, "status_code": 400}
+
+    # 2. Get the API key and user
+    api_key_record = get_api_key_from_request(request)
+    if not api_key_record:
+        return {"error": "Invalid API key", "status_code": 401}
+
+    api_key = api_key_record.api_key
+    user_id = api_key_record.user_id
+
+    # 3. Get the Provider5 instance from the application
+    provider = current_app.provider_manager.providers.get("provider-5")
+    if not provider:
+        return {"error": "Image generation provider not available", "status_code": 503}
+
+    # 4. Call the provider's image_generation method
+    try:
+        response = provider.image_generation(
+            prompt=validated_data['prompt'],
+            size=validated_data.get('size', "1024x1024"),
+            n=validated_data.get('n', 1),
+            response_format=validated_data.get('response_format', "url"),
+            model=validated_data.get('model', "flux-turbo")
+        )
+        return response, 200
+    except Exception as e:
+        log.error(f"Image generation error: {e}")
+        return {"error": str(e), "status_code": 500}
+    
 def list_models():
     """Lists available models in an OpenAI-compatible format."""
     try:

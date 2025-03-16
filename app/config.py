@@ -36,6 +36,13 @@ class Config:
     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_size': 20,
+        'max_overflow': 30,
+        'pool_timeout': 60,
+        'pool_recycle': 3600
+    }
+
     REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
     REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
     REDIS_PASSWORD = os.getenv('REDIS_PASSWORD', '')
@@ -46,6 +53,9 @@ class Config:
 
     REQUEST_LIMIT = 10
     RATE_LIMIT_WINDOW = 60
+
+    IMAGE_REQUEST_LIMIT = 5  # 5 image generation requests per minute
+    IMAGE_RATE_LIMIT_WINDOW = 60  # 60 seconds window for image generation rate limiting
 
     API_KEY_PREFIX = 'ddc-'
     API_KEY_LENGTH = 50

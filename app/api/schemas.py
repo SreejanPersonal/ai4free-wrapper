@@ -18,6 +18,14 @@ class ChatCompletionRequestSchema(Schema):
     presence_penalty = fields.Float(required=False, validate=validate.Range(min=-2.0, max=2.0))  # Added
     frequency_penalty = fields.Float(required=False, validate=validate.Range(min=-2.0, max=2.0))  # Added
 
+class ImageGenerationRequestSchema(Schema):
+    """Schema for image generation requests."""
+    prompt = fields.Str(required=True)
+    n = fields.Int(required=False, validate=validate.Range(min=1, max=10), default=1)
+    size = fields.Str(required=False, validate=validate.OneOf(["256x256", "512x512", "1024x1024"]), default="1024x1024")
+    response_format = fields.Str(required=False, validate=validate.OneOf(["url", "b64_json"]), default="url")
+    model = fields.Str(required=False, validate=validate.OneOf(["flux-pro", "flux-schnell"]), default="flux-pro")
+
 class ModelSchema(Schema):
     """Schema for a single model."""
     id = fields.Str(required=True)

@@ -1,5 +1,8 @@
 import requests
 import json
+import random
+import base64
+import time
 import logging
 import os
 from dotenv import load_dotenv
@@ -136,6 +139,76 @@ class Provider5(BaseProvider):
                 
         except Exception as e:
             log.error(f"Error in Provider5 chat_completion: {e}")
+            raise
+
+    def image_generation(self, prompt: str, size: str = "1024x1024", n: int = 1, 
+                     response_format: str = "url", model: str = "flux", **kwargs):
+        """
+        Generates images using Provider 5's image generation API with an OpenAI-compatible interface.
+        
+        Args:
+            prompt (str): The prompt to generate the image from
+            size (str): Image size in format "widthxheight", e.g. "1024x1024"
+            n (int): Number of images to generate (only returns first one in this implementation)
+            response_format (str): Format of the response. Can be "url" or "b64_json"
+            model (str): Model to use (default is "flux")
+            
+        Returns:
+            Dictionary with a timestamp and image data in OpenAI-compatible format
+        """
+        # Map the model names to Provider 5's actual model names
+        model_mapping = {
+            "flux-pro": "flux",
+            "flux-schnell": "turbo"
+        }
+        
+        actual_model = model_mapping.get(model, "flux")  # Default to flux if model not found
+        
+        # Parse size parameter
+        try:
+            width, height = map(int, size.split("x"))
+        except ValueError:
+            width, height = 1024, 1024  # Default to 1024x1024 if parsing fails
+        
+        # Generate a random seed for variety
+        seed = random.randint(1, 10000)
+        
+        # Build the API URL with supported parameters
+        base_url = os.environ.get('PROVIDER_5_IMG_BASE_URL')
+        api_url = f"{base_url}/{prompt}?width={width}&height={height}&model={actual_model}&seed={seed}&nologo=true&nofeed=yes"
+        
+        try:
+            # Download the image
+            response = requests.get(api_url)
+            
+            # Check if the response was successful
+            if response.status_code != 200:
+                log.error(f"Provider 5 image generation API error: Status {response.status_code}")
+                raise Exception(f"Provider 5 image generation API error: Status {response.status_code}")
+            
+            # Convert the image to base64
+            image_data = base64.b64encode(response.content).decode('utf-8')
+            
+            # Create a timestamp
+            timestamp = int(time.time())
+            
+            # Create the response in OpenAI-compatible format
+            result = {
+                "created": timestamp,
+                "data": []
+            }
+            
+            # Generate n images (though we're using the same image n times in this implementation)
+            for _ in range(n):
+                if response_format == "b64_json":
+                    result["data"].append({"b64_json": image_data})
+                else:  # Default to "url" format
+                    result["data"].append({"url": f"data:image/jpeg;base64,{image_data}"})
+            
+            return result
+            
+        except Exception as e:
+            log.error(f"Error in Provider5 image_generation: {e}")
             raise
 
     def get_models(self) -> list:
