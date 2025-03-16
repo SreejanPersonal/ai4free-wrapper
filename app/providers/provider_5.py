@@ -51,6 +51,7 @@ class Provider5(BaseProvider):
             # Get all models from Config
             all_models = Config.ALLOWED_MODELS
             
+            # Add all chat models
             for alias, actual_model in self.alias_to_actual.items():
                 # Get model configuration from Config
                 model_config = Config.get_model_config(alias)
@@ -75,11 +76,32 @@ class Provider5(BaseProvider):
                     "owner_cost_per_million_tokens": model_pricing
                 }
                 models.append(model_entry)
+                
+            # Add image generation models
+            image_models = [
+                {
+                    "id": "Provider-5/flux-pro",
+                    "description": "High-quality image generation model for creating detailed visuals from text prompts.",
+                    "max_tokens": 1000,  # Not really applicable for image models
+                    "provider": "Provider-5",
+                    "owner_cost_per_million_tokens": 8.00,
+                    "type": "image"
+                },
+                {
+                    "id": "Provider-5/flux-schnell",
+                    "description": "Fast image generation model optimized for quick turnaround times.",
+                    "max_tokens": 1000,  # Not really applicable for image models
+                    "provider": "Provider-5",
+                    "owner_cost_per_million_tokens": 6.00,
+                    "type": "image"
+                }
+            ]
+            
+            models.extend(image_models)
             return models
         except Exception as e:
             log.error(f"Error loading models for Provider5: {e}")
             return []
-
     def chat_completion(self, model_id: str, messages: list, stream: bool = False, **kwargs):
         """        
         This method handles both streaming and non-streaming requests.
@@ -142,7 +164,7 @@ class Provider5(BaseProvider):
             raise
 
     def image_generation(self, prompt: str, size: str = "1024x1024", n: int = 1, 
-                     response_format: str = "url", model: str = "flux", **kwargs):
+                    response_format: str = "url", model: str = "Provider-5/flux-pro", **kwargs):
         """
         Generates images using Provider 5's image generation API with an OpenAI-compatible interface.
         
@@ -151,18 +173,25 @@ class Provider5(BaseProvider):
             size (str): Image size in format "widthxheight", e.g. "1024x1024"
             n (int): Number of images to generate (only returns first one in this implementation)
             response_format (str): Format of the response. Can be "url" or "b64_json"
-            model (str): Model to use (default is "flux")
-            
+            model (str): Model to use (default is "Provider-5/flux-pro")
+                
         Returns:
             Dictionary with a timestamp and image data in OpenAI-compatible format
         """
         # Map the model names to Provider 5's actual model names
         model_mapping = {
-            "flux-pro": "flux",
-            "flux-schnell": "turbo"
+            "Provider-5/flux-pro": "flux",
+            "Provider-5/flux-schnell": "turbo"
         }
         
-        actual_model = model_mapping.get(model, "flux")  # Default to flux if model not found
+        # Extract the model name without provider prefix
+        model_name = model.split('/')[-1] if '/' in model else model
+        
+        # Map to the actual model name recognized by Provider 5's API
+        if model_name in ["flux-pro", "flux-schnell"]:
+            actual_model = model_mapping.get(f"Provider-5/{model_name}", "flux")
+        else:
+            actual_model = model_mapping.get(model, "flux")  # Default to flux if model not found
         
         # Parse size parameter
         try:

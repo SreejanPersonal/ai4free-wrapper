@@ -38,6 +38,16 @@
       "owner_cost_per_million_tokens": 4.40
     },
     {
+      "id": "Provider-3/flux-1.1-ultra",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "TypeGPT",
+      "permission": [],
+      "description": "High-quality image generation model for creating detailed visuals from text prompts.",
+      "owner_cost_per_million_tokens": 8.00,
+      "type": "image"
+    },
+    {
       "id": "Provider-4/DeepSeek-R1",
       "object": "model",
       "created": 1700000000,
@@ -171,6 +181,26 @@
       "permission": [],
       "description": "Gemini 2.0 Flash Thinking model",
       "owner_cost_per_million_tokens": 0.60
+    },
+    {
+      "id": "Provider-5/flux-pro",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "High-quality image generation model for creating detailed visuals from text prompts.",
+      "owner_cost_per_million_tokens": 8.00,
+      "type": "image"
+    },
+    {
+      "id": "Provider-5/flux-schnell",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Fast image generation model optimized for quick turnaround times.",
+      "owner_cost_per_million_tokens": 6.00,
+      "type": "image"
     }
   ]
 }

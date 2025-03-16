@@ -38,7 +38,7 @@ def chat_completions():
     
 @api_blueprint.route('/images/generations', methods=['POST'])
 @requires_api_key
-@rate_limit(limit_type="image")  # We'll modify the rate_limit decorator to support different limit types
+@rate_limit(limit_type="image")  # Apply image-specific rate limiting
 def image_generations():
     """Handles image generation requests."""
     data = request.get_json()

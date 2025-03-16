@@ -1,3 +1,9 @@
+"""
+Provider_3_Image_Testing.py
+
+A test script to verify image generation with Provider 3's flux-1.1-ultra model
+"""
+
 import os
 import json
 import base64
@@ -9,7 +15,7 @@ load_dotenv()
 
 # Configuration
 TEST_API_KEY = os.getenv("TEST_API_KEY", "ddc-CLI67Xo7FQ13CzuHAMhKnF939xncl06Wh4VQLeTvjSh5ZucF5v")
-LOCAL_API_URL = os.getenv("LOCAL_API_URL", "http://127.0.0.1:80")
+LOCAL_API_URL = os.getenv("LOCAL_API_URL", "http://127.0.0.1:5000")
 
 # Initialize the OpenAI client with our local API
 client = OpenAI(
@@ -42,39 +48,39 @@ def save_image(image_data, filename="generated_image.jpg"):
     print(f'Image saved to {filename}')
 
 def test_image_generation():
-    """Test the image generation functionality."""
-    # print_section_header("Testing Image Generation - URL format")
+    """Test the image generation functionality with Provider 3's flux-1.1-ultra model."""
+    print_section_header("Testing Image Generation with Provider 3 - URL format")
     
     # Test with URL format (default)
-    # try:
-    #     response = client.images.generate(
-    #         model="Provider-5/flux-schnell", 
-    #         prompt="A beautiful mountain landscape with a sunset",
-    #         n=1,
-    #         size="1024x1024"
-    #     )
+    try:
+        response = client.images.generate(
+            model="Provider-3/flux-1.1-ultra", 
+            prompt="A beautiful mountain landscape with a sunset",
+            n=1,
+            size="1024x1024"
+        )
         
-    #     print("Response received:")
-    #     print(f"Created: {response.created}")
-    #     print(f"Data count: {len(response.data)}")
+        print("Response received:")
+        print(f"Created: {response.created}")
+        print(f"Data count: {len(response.data)}")
         
-    #     # Save the first image
-    #     if response.data:
-    #         image_url = response.data[0].url
-    #         print(f"Image URL: {image_url[:50]}...") # Print just the beginning
-    #         save_image(image_url, "url_format_image.jpg")
+        # Save the first image
+        if response.data:
+            image_url = response.data[0].url
+            print(f"Image URL: {image_url[:50]}...") # Print just the beginning
+            save_image(image_url, "provider3_url_format_image.jpg")
     
-    # except Exception as e:
-    #     print(f"Error during URL format test: {e}")
+    except Exception as e:
+        print(f"Error during URL format test: {e}")
     
-    print_section_header("Testing Image Generation - b64_json format")
+    print_section_header("Testing Image Generation with Provider 3 - b64_json format")
     
     # Test with b64_json format
     try:
         response = client.images.generate(
-            model="Provider-5/flux-pro",
-            prompt="Photo of a ultra realistic of velma from scooby-doo, very sultry look, so hot girl, beautiful charismatic girl, so hot shot, showing piercing, athletic body, a woman wearing eye glasses and an orange top, gorgeous figure, full body shot, goth style mood, dark eye makeup, in the style of jessica drossin, life-size figures, 4k, hyper realistic, focused, extreme details, unreal engine 5, cinematic, masterpiece,, intricate ",
-            n=2,
+            model="Provider-3/flux-1.1-ultra",
+            prompt="A futuristic city with flying cars",
+            n=1,
             size="512x512",
             response_format="b64_json"
         )
@@ -87,7 +93,7 @@ def test_image_generation():
         if response.data:
             image_b64 = response.data[0].b64_json
             print(f"Image b64: {image_b64[:50]}...") # Print just the beginning
-            save_image(image_b64, "b64_format_image.jpg")
+            save_image(image_b64, "provider3_b64_format_image.jpg")
     
     except Exception as e:
         print(f"Error during b64_json format test: {e}")

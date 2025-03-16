@@ -118,8 +118,20 @@ def handle_image_generation(data, request):
     api_key = api_key_record.api_key
     user_id = api_key_record.user_id
 
-    # 3. Get the Provider5 instance from the application
-    provider = current_app.provider_manager.providers.get("provider-5")
+    # 3. Determine which provider to use based on the model
+    model_id = validated_data.get('model', 'flux-1.1-ultra')
+    
+    # Map the user-facing model name to our internal provider-specific model ID
+    if model_id == "Provider-3/flux-1.1-ultra":
+        provider_model_id = "Provider-3/flux-1.1-ultra"
+    elif model_id in ["Provider-5/flux-pro", "Provider-5/flux-schnell"]:
+        provider_model_id = model_id  # Use the model ID as is
+    else:
+        # Default to Provider-5's flux-pro for unknown models
+        provider_model_id = "Provider-5/flux-pro"
+    
+    # Get the appropriate provider
+    provider = current_app.provider_manager.select_provider(provider_model_id)
     if not provider:
         return {"error": "Image generation provider not available", "status_code": 503}
 
@@ -130,7 +142,7 @@ def handle_image_generation(data, request):
             size=validated_data.get('size', "1024x1024"),
             n=validated_data.get('n', 1),
             response_format=validated_data.get('response_format', "url"),
-            model=validated_data.get('model', "flux-turbo")
+            model=model_id
         )
         return response, 200
     except Exception as e:
