@@ -201,6 +201,36 @@
       "description": "Fast image generation model optimized for quick turnaround times.",
       "owner_cost_per_million_tokens": 6.00,
       "type": "image"
+    },
+    {
+      "id": "Provider-6/flux-schnell",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Fast image generation model (default) from Provider 6",
+      "owner_cost_per_million_tokens": 6.00,
+      "type": "image"
+    },
+    {
+      "id": "Provider-6/flux-dev",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "Developer image generation model from Provider 6",
+      "owner_cost_per_million_tokens": 7.00,
+      "type": "image"
+    },
+    {
+      "id": "Provider-6/sana-6b",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "SANA 1.6B image generation model from Provider 6",
+      "owner_cost_per_million_tokens": 8.00,
+      "type": "image"
     }
   ]
 }

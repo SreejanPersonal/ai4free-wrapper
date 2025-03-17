@@ -116,8 +116,7 @@ class Provider3(BaseProvider):
             "Authorization": f"Bearer {self.typegpt_api_key}",
             "Content-Type": "application/json"
         }
-        
-        # We always use "Image-Generator" as the actual model for TypeGPT
+
         data = {
             "model": "flux",
             "messages": [{"role": "user", "content": prompt}]

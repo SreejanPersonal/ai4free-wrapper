@@ -54,11 +54,11 @@ class Config:
     REQUEST_LIMIT = 10
     RATE_LIMIT_WINDOW = 60
 
-    IMAGE_REQUEST_LIMIT = 5  # 5 image generation requests per minute
+    IMAGE_REQUEST_LIMIT = 50  # 5 image generation requests per minute
     IMAGE_RATE_LIMIT_WINDOW = 60  # 60 seconds window for image generation rate limiting
 
     API_KEY_PREFIX = 'ddc-'
-    API_KEY_LENGTH = 50
+    API_KEY_LENGTH = 5
 
     SYSTEM_SECRET = os.environ.get('SYSTEM_SECRET')
 
@@ -90,6 +90,10 @@ class Config:
         "Provider-5/deepseek-r1-llama-70b": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-5/gemini-2.0-flash": {"max_input_tokens": 8192, "max_output_tokens": 4096},
         "Provider-5/gemini-2.0-flash-thinking": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        
+        "Provider-6/flux-schnell": {"max_input_tokens": 1000, "max_output_tokens": 1000},
+        "Provider-6/flux-dev": {"max_input_tokens": 1000, "max_output_tokens": 1000},
+        "Provider-6/sana-6b": {"max_input_tokens": 1000, "max_output_tokens": 1000},
     }
     @classmethod
     def get_model_config(cls, model_id):

@@ -45,59 +45,39 @@ class Provider5(BaseProvider):
         self.models = self._load_models()
 
     def _load_models(self):
-        """Loads the model information based on our alias mapping."""
+        """Loads the model information based on our alias mapping and models.json."""
         try:
             models = []
             # Get all models from Config
             all_models = Config.ALLOWED_MODELS
             
-            # Add all chat models
-            for alias, actual_model in self.alias_to_actual.items():
-                # Get model configuration from Config
-                model_config = Config.get_model_config(alias)
-                
-                # Find the matching model in ALLOWED_MODELS to get the correct pricing
-                model_pricing = 0.50  # Default fallback
-                for model in all_models:
-                    if model['id'] == alias:
-                        model_pricing = model.get('owner_cost_per_million_tokens', 0.50)
-                        break
-                
-                # Extract the model name from the alias for the description
-                model_name = alias.split("/")[1]
-                
-                # Create model entry with the correct pricing
-                model_entry = {
-                    "id": alias,
-                    "description": f"{model_name} model",
-                    "max_tokens": (model_config["max_input_tokens"] + 
-                                model_config["max_output_tokens"]),
-                    "provider": "Provider-5",
-                    "owner_cost_per_million_tokens": model_pricing
-                }
-                models.append(model_entry)
-                
-            # Add image generation models
-            image_models = [
-                {
-                    "id": "Provider-5/flux-pro",
-                    "description": "High-quality image generation model for creating detailed visuals from text prompts.",
-                    "max_tokens": 1000,  # Not really applicable for image models
-                    "provider": "Provider-5",
-                    "owner_cost_per_million_tokens": 8.00,
-                    "type": "image"
-                },
-                {
-                    "id": "Provider-5/flux-schnell",
-                    "description": "Fast image generation model optimized for quick turnaround times.",
-                    "max_tokens": 1000,  # Not really applicable for image models
-                    "provider": "Provider-5",
-                    "owner_cost_per_million_tokens": 6.00,
-                    "type": "image"
-                }
-            ]
+            # Filter models for this provider
+            for model in all_models:
+                if model['id'].startswith("Provider-5/"):
+                    # Get model configuration from Config for chat models
+                    if model.get('type') != "image":
+                        model_config = Config.get_model_config(model['id'])
+                        max_tokens = (model_config["max_input_tokens"] + 
+                                    model_config["max_output_tokens"])
+                    else:
+                        # For image models, use a default max_tokens value
+                        max_tokens = 1000
+                    
+                    # Create model entry with data from models.json
+                    model_entry = {
+                        "id": model['id'],
+                        "description": model.get('description', f"{model['id'].split('/')[-1]} model"),
+                        "max_tokens": max_tokens,
+                        "provider": "Provider-5",
+                        "owner_cost_per_million_tokens": model.get('owner_cost_per_million_tokens', 0.50)
+                    }
+                    
+                    # Add type field for image models
+                    if model.get('type'):
+                        model_entry["type"] = model.get('type')
+                        
+                    models.append(model_entry)
             
-            models.extend(image_models)
             return models
         except Exception as e:
             log.error(f"Error loading models for Provider5: {e}")
