@@ -231,6 +231,159 @@
       "description": "SANA 1.6B image generation model from Provider 6",
       "owner_cost_per_million_tokens": 8.00,
       "type": "image"
+    },
+    {
+      "id": "Provider-7/gpt-4o",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "openai",
+      "permission": [],
+      "description": "GPT-4o model from Provider 7",
+      "owner_cost_per_million_tokens": 10.00
+    },
+    {
+      "id": "Provider-7/gemini-2.0-flash",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "google",
+      "permission": [],
+      "description": "Gemini 2.0 Flash model from Provider 7",
+      "owner_cost_per_million_tokens": 0.60
+    },
+    {
+      "id": "Provider-7/gpt-4o-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "openai",
+      "permission": [],
+      "description": "GPT-4o-mini model from Provider 7",
+      "owner_cost_per_million_tokens": 0.60
+    },
+    {
+      "id": "Provider-7/grok-2",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "x-ai",
+      "permission": [],
+      "description": "Grok-2 model from Provider 7",
+      "owner_cost_per_million_tokens": 5.00
+    },
+    {
+      "id": "Provider-7/command-a",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "cohere",
+      "permission": [],
+      "description": "Command-A model from Provider 7",
+      "owner_cost_per_million_tokens": 3.00
+    },
+    {
+      "id": "Provider-7/claude-3.5-sonnet",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "anthropic",
+      "permission": [],
+      "description": "Claude 3.5 Sonnet model from Provider 7",
+      "owner_cost_per_million_tokens": 8.00
+    },
+    {
+      "id": "Provider-7/claude-3.5-sonnet-v2",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "anthropic",
+      "permission": [],
+      "description": "Claude 3.5 Sonnet V2 model from Provider 7",
+      "owner_cost_per_million_tokens": 8.00
+    },
+    {
+      "id": "Provider-7/claude-3.7-sonnet",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "anthropic",
+      "permission": [],
+      "description": "Claude 3.7 Sonnet model from Provider 7",
+      "owner_cost_per_million_tokens": 15.00
+    },
+    {
+      "id": "Provider-7/gpt-4.5-preview",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "openai",
+      "permission": [],
+      "description": "GPT-4.5 Preview model from Provider 7",
+      "owner_cost_per_million_tokens": 10.00
+    },
+    {
+      "id": "Provider-7/gpt-4.5",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "openai",
+      "permission": [],
+      "description": "GPT-4.5 model from Provider 7",
+      "owner_cost_per_million_tokens": 10.00
+    },
+    {
+      "id": "Provider-7/o1",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "openai",
+      "permission": [],
+      "description": "O1 model from Provider 7",
+      "owner_cost_per_million_tokens": 15.00
+    },
+    {
+      "id": "Provider-7/chatgpt-4o-latest",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "nextchat",
+      "permission": [],
+      "description": "ChatGPT-4o Latest model from Provider 7",
+      "owner_cost_per_million_tokens": 10.00
+    },
+    {
+      "id": "Provider-7/sonar-pro",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "perplexity",
+      "permission": [],
+      "description": "Sonar Pro model from Provider 7",
+      "owner_cost_per_million_tokens": 5.00
+    },
+    {
+      "id": "Provider-7/grok-3",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "x-ai",
+      "permission": [],
+      "description": "Grok-3 model from Provider 7",
+      "owner_cost_per_million_tokens": 8.00
+    },
+    {
+      "id": "Provider-7/gpt-4o-mini-search-preview",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "openai",
+      "permission": [],
+      "description": "GPT-4o Mini Search Preview model from Provider 7",
+      "owner_cost_per_million_tokens": 0.80
+    },
+    {
+      "id": "Provider-7/deepseek-r1",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "deepseek",
+      "permission": [],
+      "description": "DeepSeek R1 model from Provider 7",
+      "owner_cost_per_million_tokens": 3.00
+    },
+    {
+      "id": "Provider-7/deepseek-v3",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "deepseek",
+      "permission": [],
+      "description": "DeepSeek V3 model from Provider 7",
+      "owner_cost_per_million_tokens": 1.30
     }
   ]
 }

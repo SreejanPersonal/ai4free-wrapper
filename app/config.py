@@ -94,6 +94,25 @@ class Config:
         "Provider-6/flux-schnell": {"max_input_tokens": 1000, "max_output_tokens": 1000},
         "Provider-6/flux-dev": {"max_input_tokens": 1000, "max_output_tokens": 1000},
         "Provider-6/sana-6b": {"max_input_tokens": 1000, "max_output_tokens": 1000},
+        
+        # Provider 7 models
+        "Provider-7/gpt-4o": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/gemini-2.0-flash": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/gpt-4o-mini": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/grok-2": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/command-a": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/claude-3.5-sonnet": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/claude-3.5-sonnet-v2": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/claude-3.7-sonnet": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/gpt-4.5-preview": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/gpt-4.5": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/o1": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/chatgpt-4o-latest": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/sonar-pro": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/grok-3": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/gpt-4o-mini-search-preview": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-7/deepseek-r1": {"max_input_tokens": 32768, "max_output_tokens": 8192},
+        "Provider-7/deepseek-v3": {"max_input_tokens": 32768, "max_output_tokens": 8192},
     }
     @classmethod
     def get_model_config(cls, model_id):

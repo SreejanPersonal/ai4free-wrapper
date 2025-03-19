@@ -23,7 +23,7 @@ def requires_api_key(f):
 
 @api_blueprint.route('/chat/completions', methods=['POST'])
 @requires_api_key
-@rate_limit  # Apply rate limiting
+@rate_limit()  # Apply rate limiting with default "text" type
 def chat_completions():
     """Handles chat completion requests."""
     data = request.get_json()
