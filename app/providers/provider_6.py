@@ -29,9 +29,9 @@ class Provider6(BaseProvider):
         
         # Map our model aliases to provider's actual model names
         self.alias_to_actual = {
-            "Provider-6/flux-schnell": "model_variant_1",
-            "Provider-6/flux-dev": "model_variant_2",
-            "Provider-6/sana-6b": "model_variant_3"
+            "Provider-6/flux-schnell": "flux_1_schnell",
+            "Provider-6/flux-dev": "flux_1_dev",
+            "Provider-6/sana-6b": "sana_1_6b"
         }
         
         self.models = self._load_models()
