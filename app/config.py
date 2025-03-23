@@ -5,6 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# --- Firebase and Supabase Configuration ---
+FIREBASE_SERVICE_ACCOUNT_PATH = os.getenv('FIREBASE_SERVICE_ACCOUNT_PATH')
+SUPABASE_URL = os.getenv('SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_KEY')
+
 # --- Neon Defaults ---
 NEON_POSTGRES_URI = os.getenv("NEON_POSTGRES_URI")
 
@@ -54,15 +59,23 @@ class Config:
     REQUEST_LIMIT = 10
     RATE_LIMIT_WINDOW = 60
 
-    IMAGE_REQUEST_LIMIT = 50  # 5 image generation requests per minute
-    IMAGE_RATE_LIMIT_WINDOW = 60  # 60 seconds window for image generation rate limiting
+    IMAGE_REQUEST_LIMIT = 50
+    IMAGE_RATE_LIMIT_WINDOW = 60
 
-    API_KEY_PREFIX = 'ddc-'
-    API_KEY_LENGTH = 5
+    API_KEY_PREFIX = 'ddc-beta-'
+    API_KEY_LENGTH = 54
+    
+    # API key generation configuration
+    API_KEY_PREFIX_LENGTH = 10
+    RANDOM_VALUE_LENGTH = API_KEY_LENGTH - API_KEY_PREFIX_LENGTH - len(API_KEY_PREFIX)
+    
+    # Firebase and Supabase configuration
+    FIREBASE_SERVICE_ACCOUNT_PATH = FIREBASE_SERVICE_ACCOUNT_PATH
+    SUPABASE_URL = SUPABASE_URL
+    SUPABASE_KEY = SUPABASE_KEY
 
     SYSTEM_SECRET = os.environ.get('SYSTEM_SECRET')
 
-    # Default tokens are still here, but the model‐specific configuration for Provider4 is keyed by alias.
     MAX_INPUT_TOKENS = 4000
     MAX_OUTPUT_TOKENS = 4000
 
@@ -95,7 +108,6 @@ class Config:
         "Provider-6/flux-dev": {"max_input_tokens": 1000, "max_output_tokens": 1000},
         "Provider-6/sana-6b": {"max_input_tokens": 1000, "max_output_tokens": 1000},
         
-        # Provider 7 models
         "Provider-7/gpt-4o": {"max_input_tokens": 8192, "max_output_tokens": 4096},
         "Provider-7/gemini-2.0-flash": {"max_input_tokens": 8192, "max_output_tokens": 4096},
         "Provider-7/gpt-4o-mini": {"max_input_tokens": 8192, "max_output_tokens": 4096},

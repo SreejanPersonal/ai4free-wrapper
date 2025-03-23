@@ -13,8 +13,8 @@ requests==2.32.3
 openai==1.61.1
 
 # Database ORM and adapter
-SQLAlchemy==2.0.29
-psycopg2-binary==2.9.6       # PostgreSQL driver for production database connectivity
+SQLAlchemy
+psycopg2-binary
 
 # Utility libraries
 tiktoken
@@ -22,3 +22,7 @@ tiktoken
 # Production WSGI server
 gunicorn==23.0.0
 gevent
+
+# Firebase and Supabase integration
+firebase-admin==6.3.0
+supabase==2.1.0

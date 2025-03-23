@@ -3,6 +3,7 @@ node_modules/
 
 # Environment variables
 .env
+credentials/
 
 # Build output
 dist/

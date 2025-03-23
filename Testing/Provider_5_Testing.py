@@ -77,7 +77,7 @@ def test_streaming(model_id):
         print(f"Error during streaming test: {e}")
 
 if __name__ == "__main__":
-    model = "Provider-5/claude-3.7-sonnet"
+    model = "Provider-5/gpt-4o"
     
     print_separator()
     test_non_streaming(model)

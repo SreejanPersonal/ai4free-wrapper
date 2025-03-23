@@ -17,7 +17,7 @@ load_dotenv()
 MODEL = "Provider-7/claude-3.7-sonnet"
 
 # Configuration
-TEST_API_KEY = "ddc-CLI67Xo7FQ13CzuHAMhKnF939xncl06Wh4VQLeTvjSh5ZucF5v"
+TEST_API_KEY = "ddc-beta-ihjmpiwf98-HFrY7hd3BjLU9q8hEgKLEjHuAeQEnhvVPiB"
 LOCAL_API_URL = os.getenv("LOCAL_API_URL", "http://127.0.0.1:5000")
 
 # Initialize the OpenAI client with our local API
@@ -26,9 +26,9 @@ client = OpenAI(
     base_url=f"{LOCAL_API_URL}/v1"
 )
 
-models = client.models.list()
-for model in models:
-    print(model.id)
+# models = client.models.list()
+# for model in models:
+#     print(model.id)
 
 def print_separator():
     """Prints a separator line for readability."""

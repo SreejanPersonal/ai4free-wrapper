@@ -168,43 +168,82 @@ def list_models():
         return {"error": "Failed to retrieve model list", "status_code": 500}
 
 def create_api_key(data):
+    """
+    Creates a new API key for a user.
+    
+    This function integrates with Firebase and Supabase for authentication:
+    1. Validates the system secret
+    2. Checks required fields including email (mandatory for Firebase/Supabase validation)
+    3. Calls the create_new_api_key service which handles:
+       - Firebase authentication (user must exist in Firebase)
+       - Supabase integration (user must exist or will be created in Supabase)
+       - Local PostgreSQL database updates
+    4. Returns appropriate response based on the result
+    
+    Args:
+        data (dict): The request data containing user information
+        
+    Returns:
+        tuple: (response_data, status_code) - The response data and HTTP status code
+    """
     from ..models.usage import User
     from ..models.api_key import APIKey
+    
+    # Validate system secret
     system_secret = Config.SYSTEM_SECRET
     provided_secret = data.get('secret')
     if not system_secret or provided_secret != system_secret:
         return {"error": "Unauthorized", "status_code": 401}, 401
 
+    # Get user data from request
     user_id = data.get('user_id')
     telegram_user_link = data.get('telegram_user_link')
+    email = data.get('email')  # Required field for Firebase/Supabase validation
     first_name = data.get('first_name')
     last_name = data.get('last_name')
     username = data.get('username')
+    
+    # Validate required fields
     if not user_id or not telegram_user_link:
         return {"error": "Missing required fields: user_id and telegram_user_link", "status_code": 400}, 400
+    
+    # Email is now required for Firebase/Supabase validation
+    if not email:
+        return {"error": "Missing required field: email is required for authentication", "status_code": 400}, 400
 
-    # First check if the user already exists and already has an API key.
-    existing_user = User.query.filter_by(external_user_id=user_id).first()
-    if existing_user:
-        existing_key = APIKey.query.filter_by(user_id=existing_user.user_id, is_active=True).first()
-        if existing_key:
-            return {
-                "error": "User already exists. Cannot create duplicate API key.",
-                "existing_key": existing_key.api_key,
-                "status_code": 409
-            }, 409
-
-    # No pre-existing user and API key? Proceed to create new API key.
+    # Attempt to create or retrieve API key
     try:
-        # create_new_api_key creates a user record if it does not exist so it is safe to call here.
-        new_api_key = create_new_api_key(user_id, telegram_user_link, first_name, last_name, username)
-        return {
-            "api_key": new_api_key,
-            "message": "Store this key securely - it cannot be retrieved later!",
-            "status_code": 201
-        }, 201
+        # The updated create_new_api_key function now handles Firebase and Supabase integration
+        api_key, status_code, message = create_new_api_key(
+            user_id, 
+            telegram_user_link, 
+            email=email,
+            first_name=first_name, 
+            last_name=last_name, 
+            username=username
+        )
+        
+        # Handle different status codes
+        if status_code == 200:  # API key already exists
+            return {
+                "api_key": api_key,
+                "message": message,
+                "status_code": status_code
+            }, status_code
+        elif status_code == 201:  # New API key created
+            return {
+                "api_key": api_key,
+                "message": "Store this key securely - it cannot be retrieved later!",
+                "status_code": status_code
+            }, status_code
+        else:  # Other status codes (e.g., 400, 404, 500)
+            return {
+                "error": message,
+                "status_code": status_code
+            }, status_code
+            
     except Exception as e:
-        # Any other exception gets a 500.
+        # Any other exception gets a 500
         log.error(f"Error creating API key: {e}")
         return {"error": str(e), "status_code": 500}, 500
     
