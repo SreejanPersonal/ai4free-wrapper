@@ -16,26 +16,31 @@ import logging
 
 log = logging.getLogger(__name__)
 
-def create_new_api_key(external_user_id, telegram_user_link, email=None, first_name=None, last_name=None, username=None):
+def create_new_api_key(external_user_id, telegram_user_link, email=None, first_name=None, last_name=None, username=None, partial_api_key=None, id=None):
     """
     Creates a new API key and associates it with a user.
     
     This function follows the exact flow from test_final.py:
     1. Initialize Firebase
-    2. If email is provided (required):
+    2. If id is provided:
+       - Fetch user from Supabase by ID
+       - Extract email and API key
+    3. If email is provided (required when id is not provided):
        - Check if user exists in Firebase (must exist)
        - Check if user exists in Supabase
        - Process based on existence in both systems
-    3. Create or update the user in PostgreSQL database
-    4. Return the API key with appropriate status code and message
+    4. Create or update the user in PostgreSQL database
+    5. Return the API key with appropriate status code and message
     
     Args:
         external_user_id (str): The external user ID (Telegram ID)
         telegram_user_link (str): The Telegram user link
-        email (str, required): The user's email address for Firebase/Supabase validation
+        email (str, optional): The user's email address for Firebase/Supabase validation (required if id not provided)
         first_name (str, optional): The user's first name
         last_name (str, optional): The user's last name
         username (str, optional): The user's username
+        partial_api_key (str, optional): Partial API key for verification (required if id not provided)
+        id (str, optional): The Supabase user ID. If provided, email and partial_api_key are not required.
         
     Returns:
         tuple: (api_key_str, status_code, message) - The API key, status code, and message
@@ -49,27 +54,64 @@ def create_new_api_key(external_user_id, telegram_user_link, email=None, first_n
         # Initialize Firebase
         initialize_firebase()
         
-        # Email is required for Firebase/Supabase validation
-        if not email:
-            return None, 400, "Email is required for authentication"
+        # If ID is provided, fetch user from Supabase by ID
+        if id:
+            from ..utils.external_auth import get_supabase_user_by_id
+            supabase_exists, supabase_user_data = get_supabase_user_by_id(id)
+            
+            # If user doesn't exist in Supabase, return error
+            if not supabase_exists:
+                return None, 404, f"User with ID {id} not found in Supabase"
+                
+            # Extract email from Supabase user data
+            email = supabase_user_data.get('user_email')
+            if not email:
+                return None, 500, "Email not found in Supabase user data"
+                
+            # Check if user exists in Firebase
+            firebase_exists = check_firebase_user(email)
+            
+            # If user doesn't exist in Firebase, delete from Supabase and return error
+            if not firebase_exists:
+                log.info(f"User with email {email} exists in Supabase but not in Firebase. Deleting from Supabase.")
+                success, response = delete_supabase_user(id)
+                if success:
+                    log.info(f"Successfully deleted user with ID {id} from Supabase.")
+                else:
+                    log.warning(f"Failed to delete user with ID {id} from Supabase.")
+                return None, 404, f"User with email {email} not found in Firebase Authentication (Supabase entry cleaned up)"
+                
+            # Skip partial API key verification when ID is provided
+            log.info(f"User with ID {id} found in both systems, skipping partial API key verification")
+        else:
+            # Email is required for Firebase/Supabase validation when ID is not provided
+            if not email:
+                return None, 400, "Email is required for authentication when ID is not provided"
+            
+            # Check if user exists in Firebase and Supabase
+            firebase_exists = check_firebase_user(email)
+            supabase_exists, supabase_user_data = check_supabase_user(email)
         
-        # Check if user exists in Firebase and Supabase
-        firebase_exists = check_firebase_user(email)
-        supabase_exists, supabase_user_data = check_supabase_user(email)
-        
-        # If user exists in Supabase but not in Firebase, delete from Supabase
-        if supabase_exists and not firebase_exists:
-            log.info(f"User with email {email} exists in Supabase but not in Firebase. Deleting from Supabase.")
-            success, response = delete_supabase_user(supabase_user_data['id'])
-            if success:
-                log.info(f"Successfully deleted user with email {email} from Supabase.")
-            else:
-                log.warning(f"Failed to delete user with email {email} from Supabase.")
-            return None, 404, f"User with email {email} not found in Firebase Authentication (Supabase entry cleaned up)"
-        
-        # If user doesn't exist in Firebase, return error
-        if not firebase_exists:
-            return None, 404, f"User with email {email} not found in Firebase Authentication"
+            # If user exists in Supabase but not in Firebase, delete from Supabase
+            if supabase_exists and not firebase_exists:
+                log.info(f"User with email {email} exists in Supabase but not in Firebase. Deleting from Supabase.")
+                success, response = delete_supabase_user(supabase_user_data['id'])
+                if success:
+                    log.info(f"Successfully deleted user with email {email} from Supabase.")
+                else:
+                    log.warning(f"Failed to delete user with email {email} from Supabase.")
+                return None, 404, f"User with email {email} not found in Firebase Authentication (Supabase entry cleaned up)"
+            
+            # If user doesn't exist in Firebase, return error
+            if not firebase_exists:
+                return None, 404, f"User with email {email} not found in Firebase Authentication"
+            
+            # Verify partial API key if user exists in Supabase (only when ID is not provided)
+            if supabase_exists:
+                # Check if partial API key matches the stored API key
+                from ..utils.external_auth import verify_partial_api_key
+                if not verify_partial_api_key(partial_api_key, supabase_user_data):
+                    return None, 401, "Invalid partial API key"
         
         # 1. Create or retrieve the user in PostgreSQL
         user = User.query.filter_by(external_user_id=external_user_id).first()
@@ -87,25 +129,23 @@ def create_new_api_key(external_user_id, telegram_user_link, email=None, first_n
         # Check if user already has an API key in PostgreSQL
         existing_key = APIKey.query.filter_by(user_id=user.user_id).first()
         
-        # Process user with Firebase and Supabase
-        result = process_user_for_api_key(email, existing_key.api_key if existing_key else None)
+        # If user already has an API key in PostgreSQL, return it without trying to update
+        if existing_key:
+            log.info(f"User {external_user_id} already has an API key in the database, returning existing key")
+            return existing_key.api_key, 200, "Using existing API key from database"
+        
+        # Process user with Firebase and Supabase only if no existing key
+        result = process_user_for_api_key(email, None)
         
         if result["success"]:
             # User exists in both Firebase and Supabase
             if "complete_api_key" in result:
                 api_key_str = result["complete_api_key"]
                 
-                # Update or create the API key in PostgreSQL
-                if existing_key:
-                    # Update existing key if needed
-                    if existing_key.api_key != api_key_str:
-                        existing_key.api_key = api_key_str
-                        db.session.commit()
-                else:
-                    # Create new API key record
-                    api_key = APIKey(api_key=api_key_str, user_id=user.user_id)
-                    db.session.add(api_key)
-                    db.session.commit()
+                # Create new API key record (we already checked that none exists)
+                api_key = APIKey(api_key=api_key_str, user_id=user.user_id)
+                db.session.add(api_key)
+                db.session.commit()
                 
                 return api_key_str, result["status_code"], result["message"]
         else:

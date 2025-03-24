@@ -54,6 +54,30 @@ def check_firebase_user(email):
         log.error(f"Firebase error: {e}")
         return False
 
+def get_supabase_user_by_id(user_id):
+    """
+    Get a user from Supabase by their ID
+    
+    Args:
+        user_id: The ID of the user to fetch
+        
+    Returns:
+        tuple: (bool, dict) - (True, user_data) if the user exists, (False, None) otherwise
+    """
+    try:
+        supabase = get_supabase_client()
+        if not supabase:
+            return False, None
+            
+        response = supabase.table("beta_api_keys").select("*").eq("id", user_id).execute()
+        
+        if response.data and len(response.data) > 0:
+            return True, response.data[0]
+        return False, None
+    except Exception as e:
+        log.error(f"Supabase error: {e}")
+        return False, None
+
 def check_supabase_user(email):
     """
     Check if a user exists in Supabase and return their data if found
@@ -175,6 +199,28 @@ def create_supabase_user(email, api_key=None):
         log.error(f"Error creating Supabase user: {e}")
         return False, None
 
+def verify_partial_api_key(partial_key, user_data):
+    """
+    Verify if the partial API key matches the stored API key in Supabase
+    
+    Args:
+        partial_key (str): The partial API key to verify
+        user_data (dict): The user data from Supabase
+        
+    Returns:
+        bool: True if the partial key matches, False otherwise
+    """
+    if not partial_key or not user_data:
+        return False
+        
+    # Get the stored API key from user data
+    stored_key = user_data.get('api_key')
+    if not stored_key:
+        return False
+        
+    # Check if the partial key is a substring of the stored key
+    return partial_key in stored_key
+
 def process_user_for_api_key(email, current_api_key=None):
     """
     Process a user by checking both systems and updating API key if needed
@@ -213,8 +259,9 @@ def process_user_for_api_key(email, current_api_key=None):
     
     # If user exists in both systems
     if firebase_exists and supabase_exists:
-        # Check if complete_api_key is already set
+        # Always prioritize returning an existing complete API key if it exists
         if user_data.get('complete_api_key'):
+            log.info(f"Found existing complete API key for email {email}, returning it")
             return {
                 "success": True,
                 "message": "API key already exists",
@@ -223,6 +270,7 @@ def process_user_for_api_key(email, current_api_key=None):
                 "status_code": 200
             }
         
+        # If no complete API key exists, check if we need to generate one
         current_api_key = user_data.get('api_key', '')
         
         # Check if API key contains the "xxx" pattern
@@ -240,6 +288,7 @@ def process_user_for_api_key(email, current_api_key=None):
             success, response = update_complete_api_key(user_data['id'], new_api_key)
             
             if success:
+                log.info(f"Generated new complete API key for email {email}")
                 return {
                     "success": True,
                     "message": "Complete API key generated successfully",
@@ -264,31 +313,18 @@ def process_user_for_api_key(email, current_api_key=None):
             }
     elif firebase_exists and not supabase_exists:
         # User exists in Firebase but not in Supabase
-        # If we have a current API key, create a new Supabase entry
-        if current_api_key:
-            success, user_data = create_supabase_user(email, current_api_key)
-            if success:
-                # Now process the user again to generate the complete API key
-                return process_user_for_api_key(email, current_api_key)
-            else:
-                return {
-                    "success": False,
-                    "message": "Failed to create user in Supabase",
-                    "email": email,
-                    "status_code": 500
-                }
+        # Create a new entry in Supabase with a placeholder API key
+        success, user_data = create_supabase_user(email)
+        if success:
+            log.info(f"Created new Supabase user for email {email}")
+            return process_user_for_api_key(email)
         else:
-            # Create a new entry in Supabase with a placeholder API key
-            success, user_data = create_supabase_user(email)
-            if success:
-                return process_user_for_api_key(email)
-            else:
-                return {
-                    "success": False,
-                    "message": "Failed to create user in Supabase",
-                    "email": email,
-                    "status_code": 500
-                }
+            return {
+                "success": False,
+                "message": "Failed to create user in Supabase",
+                "email": email,
+                "status_code": 500
+            }
     else:
         # User not found in one or both systems
         return {

@@ -210,6 +210,14 @@ def create_api_key(data):
     # Email is now required for Firebase/Supabase validation
     if not email:
         return {"error": "Missing required field: email is required for authentication", "status_code": 400}, 400
+    
+    # Get ID if provided (optional)
+    id = data.get('id')
+    
+    # If ID is not provided, partial API key is required
+    partial_api_key = data.get('partial_api_key')
+    if not id and not partial_api_key:
+        return {"error": "Missing required field: partial_api_key is required for authentication when id is not provided", "status_code": 400}, 400
 
     # Attempt to create or retrieve API key
     try:
@@ -220,7 +228,9 @@ def create_api_key(data):
             email=email,
             first_name=first_name, 
             last_name=last_name, 
-            username=username
+            username=username,
+            partial_api_key=partial_api_key,  # Pass partial API key
+            id=id  # Pass ID if provided
         )
         
         # Handle different status codes

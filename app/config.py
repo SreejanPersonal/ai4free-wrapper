@@ -48,13 +48,25 @@ class Config:
         'pool_recycle': 3600
     }
 
-    REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
-    REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
-    REDIS_PASSWORD = os.getenv('REDIS_PASSWORD', '')
-    REDIS_URL = (
-        f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0"
-        if REDIS_PASSWORD else f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
-    )
+    # Get Redis configuration
+    REDIS_URL = os.getenv('REDIS_URL')
+    
+    # If REDIS_URL not provided, construct it from components
+    if not REDIS_URL:
+        REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+        REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
+        REDIS_PASSWORD = os.getenv('REDIS_PASSWORD', '')
+        REDIS_USERNAME = os.getenv('REDIS_USERNAME', '')
+        
+        # For Upstash, ensure proper URL format
+        if 'upstash.io' in REDIS_HOST or '1Panel' in REDIS_HOST or '1panel' in REDIS_HOST:
+            REDIS_URL = f"rediss://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0"
+        else:
+            # Local Redis URL format
+            REDIS_URL = (
+                f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0"
+                if REDIS_PASSWORD else f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
+            )
 
     REQUEST_LIMIT = 10
     RATE_LIMIT_WINDOW = 60
