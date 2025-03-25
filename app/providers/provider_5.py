@@ -39,7 +39,8 @@ class Provider5(BaseProvider):
             "Provider-5/deepseek-r1": "deepseek-reasoner",
             "Provider-5/deepseek-r1-llama-70b": "deepseek-r1-llama",
             "Provider-5/gemini-2.0-flash": "gemini",
-            "Provider-5/gemini-2.0-flash-thinking": "gemini-thinking"
+            "Provider-5/gemini-2.0-flash-thinking": "gemini-thinking",
+            "Provider-5/gpt-4o-audio-preview": "openai-audio"
         }
         
         self.models = self._load_models()
@@ -92,12 +93,24 @@ class Provider5(BaseProvider):
         
         actual_model = self.alias_to_actual[model_id]
         
+        # Force stream to False for audio model as it doesn't support streaming
+        if model_id == "Provider-5/gpt-4o-audio-preview":
+            stream = False
+        
         # Prepare the request payload
         payload = {
             "model": actual_model,
             "messages": messages,
             "stream": stream
         }
+        
+        # Add audio-specific parameters for the audio model
+        if model_id == "Provider-5/gpt-4o-audio-preview":
+            payload["modalities"] = ["text", "audio"]
+            payload["audio"] = {
+                "voice": kwargs.get("voice", "alloy"),
+                "format": kwargs.get("format", "wav")
+            }
         
         # Add optional parameters if provided
         for param in ["temperature", "max_tokens", "top_p", "presence_penalty", "frequency_penalty"]:
@@ -137,8 +150,50 @@ class Provider5(BaseProvider):
             
             # Handle non-streaming response
             else:
-                return response.json()
+                # Log the raw response for debugging
+                log.debug(f"Raw response from Provider 5 API: {response.text[:200]}...")
                 
+                # Check if the response has content before parsing as JSON
+                if response.content:
+                    try:
+                        return response.json()
+                    except json.JSONDecodeError as e:
+                        log.error(f"JSON parsing error in non-streaming response: {e}")
+                        log.error(f"Response content: {response.text[:500]}")
+                        
+                        # For audio model, we might get a different response format
+                        if model_id == "Provider-5/gpt-4o-audio-preview":
+                            # Return a structured response that matches expected format
+                            return {
+                                "choices": [
+                                    {
+                                        "message": {
+                                            "content": None,
+                                            "role": "assistant",
+                                            "audio": {
+                                                "data": base64.b64encode(response.content).decode('utf-8') if response.content else "",
+                                                "format": kwargs.get("format", "wav")
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        
+                        # For regular models, create a fallback response
+                        # This is a workaround for Provider 5's API inconsistency
+                        return {
+                            "choices": [
+                                {
+                                    "message": {
+                                        "content": response.text,
+                                        "role": "assistant"
+                                    }
+                                }
+                            ]
+                        }
+                else:
+                    log.error("Empty response from Provider 5 API")
+                    raise Exception("Empty response from Provider 5 API")
         except Exception as e:
             log.error(f"Error in Provider5 chat_completion: {e}")
             raise

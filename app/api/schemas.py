@@ -2,6 +2,12 @@
 from marshmallow import Schema, fields, validate, ValidationError
 
 
+class AudioSchema(Schema):
+    """Schema for audio generation parameters."""
+    voice = fields.Str(required=False, validate=validate.OneOf(["alloy", "echo", "fable", "onyx", "nova", "shimmer"]), default="alloy")
+    format = fields.Str(required=False, validate=validate.OneOf(["mp3", "opus", "aac", "flac", "wav"]), default="mp3")
+
+
 class MessageSchema(Schema):
     """Schema for a single chat message."""
     role = fields.Str(required=True, validate=validate.OneOf(["system", "user", "assistant","developer"]))
@@ -17,6 +23,8 @@ class ChatCompletionRequestSchema(Schema):
     top_p = fields.Float(required=False, validate=validate.Range(min=0.0, max=1.0))  # Added
     presence_penalty = fields.Float(required=False, validate=validate.Range(min=-2.0, max=2.0))  # Added
     frequency_penalty = fields.Float(required=False, validate=validate.Range(min=-2.0, max=2.0))  # Added
+    modalities = fields.List(fields.Str(validate=validate.OneOf(["text", "audio"])), required=False)
+    audio = fields.Nested(AudioSchema, required=False)
 
 class ImageGenerationRequestSchema(Schema):
     """Schema for image generation requests."""

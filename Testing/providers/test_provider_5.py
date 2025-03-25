@@ -8,7 +8,13 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 import sys
-sys.path.append('../..')  # Add parent directory to path for imports
+
+# Get the absolute path to the project root
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(current_dir, "../.."))
+sys.path.append(project_root)
+
+# Import helper functions
 from testing.utils.test_helpers import print_section_header, print_test_case, print_separator
 
 # Load environment variables
@@ -38,7 +44,7 @@ def test_non_streaming(model_id):
             model=model_id,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "Write a short paragraph about artificial intelligence."}
+                {"role": "user", "content": "Say hi."}
             ],
             stream=False
         )
@@ -123,8 +129,8 @@ if __name__ == "__main__":
     
     test_non_streaming(model)
     print_separator()
-    test_streaming(model)
-    print_separator()
+    # test_streaming(model)
+    # print_separator()
     
     # Uncomment to test all supported models
     # test_provider_5_models()

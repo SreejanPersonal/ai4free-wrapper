@@ -43,6 +43,11 @@ def handle_chat_completion(data, request):
     data_for_provider.pop("model", None)
     data_for_provider.pop("messages", None)
     data_for_provider.pop("stream", None)
+    
+    # Handle audio-specific parameters if present
+    if "modalities" in validated_data and "audio" in validated_data:
+        data_for_provider["modalities"] = validated_data.get("modalities")
+        data_for_provider["audio"] = validated_data.get("audio")
 
     # 4. Check token limits using model-specific configuration
     messages = validated_data['messages']

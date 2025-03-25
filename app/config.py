@@ -115,6 +115,7 @@ class Config:
         "Provider-5/deepseek-r1-llama-70b": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-5/gemini-2.0-flash": {"max_input_tokens": 8192, "max_output_tokens": 4096},
         "Provider-5/gemini-2.0-flash-thinking": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/gpt-4o-audio-preview": {"max_input_tokens": 8192, "max_output_tokens": 4096},
         
         "Provider-6/flux-schnell": {"max_input_tokens": 1000, "max_output_tokens": 1000},
         "Provider-6/flux-dev": {"max_input_tokens": 1000, "max_output_tokens": 1000},

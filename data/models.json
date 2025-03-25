@@ -183,6 +183,16 @@
       "owner_cost_per_million_tokens": 0.60
     },
     {
+      "id": "Provider-5/gpt-4o-audio-preview",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "DevsDoCode",
+      "permission": [],
+      "description": "GPT-4o model with audio generation capabilities",
+      "owner_cost_per_million_tokens": 12.00,
+      "type": "audio"
+    },
+    {
       "id": "Provider-5/flux-pro",
       "object": "model",
       "created": 1700000000,
