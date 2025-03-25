@@ -17,7 +17,6 @@ class MaxAPIKeyRotationsError(Exception):
 class Provider7(BaseProvider):
     """
     Provider 7 implementation.
-    This provider uses the OpenAI-compatible API at meow.cablyai.com.
     
     Features:
     - Supports multiple API keys with automatic rotation on errors
@@ -34,7 +33,7 @@ class Provider7(BaseProvider):
 
     def __init__(self):
         self.models = self._load_models()
-        self.base_url = os.environ.get("PROVIDER_7_BASE_URL", "https://meow.cablyai.com/v1")
+        self.base_url = os.environ.get("PROVIDER_7_BASE_URL")
         
         # Support for multiple API keys
         api_keys_str = os.environ.get("PROVIDER_7_API_KEYS", "[]")
@@ -149,7 +148,6 @@ class Provider7(BaseProvider):
 
     def chat_completion(self, model_id: str, messages: list, stream: bool = False, **kwargs):
         """
-        Performs a chat completion using the meow.cablyai.com API.
         With automatic API key rotation on specified errors.
         """
         # Extract model name without the provider prefix

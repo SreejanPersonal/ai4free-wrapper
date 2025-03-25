@@ -1,63 +1,103 @@
 # AI4Free Wrapper - Testing Directory
 
-**Comprehensive Testing Scripts**
+**Comprehensive Testing Framework**
 
-This directory provides a comprehensive suite of test scripts for validating the AI4Free API wrapper. These scripts are designed to test API endpoints, provider integrations, and usage tracking functionalities, ensuring the reliability, performance, and correctness of the application.
+This directory provides a structured, modular testing framework for validating the AI4Free API wrapper. The tests are organized by functionality to make it easier to run specific tests and maintain the codebase.
 
----
+## Directory Structure
 
-## Directory Overview
+```
+testing/
+├── api/                       # API endpoint tests
+│   ├── test_api_endpoints.py  # Core API endpoint tests
+│   └── test_api_usage.py      # Usage tracking tests
+│
+├── client/                    # OpenAI client compatibility tests
+│   └── test_openai_client.py  # Client compatibility tests
+│
+├── providers/                 # Provider-specific tests
+│   ├── test_provider_5.py     # Provider 5 tests
+│   └── test_provider_7.py     # Provider 7 tests
+│
+├── image_generation/          # Image generation tests
+│   ├── test_image_generation.py       # General image generation tests
+│   └── test_provider_specific_image.py # Provider-specific image tests
+│
+├── utils/                     # Shared testing utilities
+│   ├── image_utils.py         # Image handling utilities
+│   └── test_helpers.py        # Common test helper functions
+│
+└── README.md                  # This documentation
+```
 
-1. **Test Scripts**: Python Test Files.
-   - **`API_Endpoint_Testing.py`**: API Endpoint Functionality Tests.
-     - Tests the core functionality and responses of the API endpoints.
-     - Includes tests for chat completion endpoints (`/v1/chat/completions`), model listing (`/v1/models`), API key generation (`/v1/api-keys`), usage details (`/v1/usage`), and uptime checks (`/v1/uptime/<model_id>`).
-     - Validates request/response formats, status codes, and expected behaviors for different API operations.
-     - See [`testing/API_Endpoint_Testing.py`](./API_Endpoint_Testing.py) for test implementations.
+## Test Categories
 
-   - **`OpenAI_Client_Testing.py`**: OpenAI Client Compatibility Tests.
-     - Validates the API wrapper's compatibility and integration with OpenAI's client API libraries and tools.
-     - Ensures that the API wrapper behaves as expected when used with OpenAI-compatible clients.
-     - Tests request/response compatibility, header handling, and adherence to OpenAI API standards.
-     - See [`testing/OpenAI_Client_Testing.py`](./OpenAI_Client_Testing.py) for test implementations.
+### API Tests
+- **test_api_endpoints.py**: Tests core API endpoints including API key generation and authentication.
+- **test_api_usage.py**: Tests API usage tracking and reporting.
 
-   - **`test_api_usage.py`**: API Usage Tracking and Rate Limit Tests.
-     - Tests API usage tracking, rate limiting, and cost metrics functionalities.
-     - Validates that token usage is correctly tracked, rate limits are enforced as configured, and cost calculations are accurate.
-     - Includes tests for usage recording, reporting, and rate limit enforcement mechanisms.
-     - See [`testing/test_api_usage.py`](./test_api_usage.py) for test implementations.
+### Client Tests
+- **test_openai_client.py**: Tests compatibility with the OpenAI client library across various providers.
 
----
+### Provider Tests
+- **test_provider_5.py**: Tests Provider 5's chat completion capabilities.
+- **test_provider_7.py**: Tests Provider 7's chat completion capabilities.
 
-## Usage
+### Image Generation Tests
+- **test_image_generation.py**: Tests general image generation functionality.
+- **test_provider_specific_image.py**: Tests provider-specific image generation capabilities.
 
-Run the test scripts to thoroughly validate the AI4Free API wrapper's functionality before deployment or after making changes. These scripts are crucial for:
+### Utilities
+- **test_helpers.py**: Common helper functions for formatting test output.
+- **image_utils.py**: Utilities for saving and managing generated images.
 
-- **Debugging**: Identifying and fixing bugs or issues in the API implementation, provider integrations, or usage tracking logic.
-- **Performance Analysis**: Evaluating the performance of API endpoints and identifying potential bottlenecks.
-- **Regression Testing**: Ensuring that new changes do not introduce regressions or break existing functionalities.
-- **Reliability Assurance**: Verifying the overall reliability and stability of the system before deploying it to production.
-- **Continuous Integration/Continuous Deployment (CI/CD)**: Integrating tests into CI/CD pipelines to automate testing and ensure code quality.
+## Running Tests
 
----
+### Running Individual Tests
 
-### Running Tests
-
-To execute the test scripts, navigate to the `testing` directory in your terminal and run the Python scripts directly using the python interpreter:
+To run a specific test module, navigate to the testing directory and run the Python file directly:
 
 ```bash
 cd testing
-python API_Endpoint_Testing.py
-python OpenAI_Client_Testing.py
-python test_api_usage.py
+python api/test_api_endpoints.py
 ```
 
-Alternatively, you can run all tests at once from the project root directory:
+### Running All Tests
+
+To run all tests, you can use a simple script or run them individually:
 
 ```bash
-python -m unittest testing/API_Endpoint_Testing.py testing/OpenAI_Client_Testing.py testing/test_api_usage.py
+# Example script to run all tests (create this if needed)
+cd testing
+python -m api.test_api_endpoints
+python -m api.test_api_usage
+python -m client.test_openai_client
+python -m providers.test_provider_5
+python -m providers.test_provider_7
+python -m image_generation.test_image_generation
+python -m image_generation.test_provider_specific_image
 ```
 
-Review the output of the test scripts to check for any test failures or errors. Ensure all tests pass before deploying the application to production.
+## Test Configuration
 
-By utilizing these comprehensive test scripts, you can ensure the AI4Free API wrapper is robust, reliable, and functions as expected across different scenarios and integrations.
+Most tests use environment variables for configuration. Ensure your `.env` file is properly set up with the following variables:
+
+- `LOCAL_API_URL`: The URL of your local API server (default: "http://127.0.0.1:5000")
+- `TEST_API_KEY`: Your test API key
+- `SYSTEM_SECRET`: The system secret for API key generation tests
+
+## Adding New Tests
+
+When adding new tests:
+
+1. Place them in the appropriate category directory
+2. Import common utilities from `testing.utils`
+3. Follow the existing pattern for consistent test output
+4. Update this README if adding new test categories
+
+## Best Practices
+
+- Use the common utilities for consistent output formatting
+- Create output directories for test artifacts (e.g., generated images)
+- Handle exceptions properly and provide clear error messages
+- Use descriptive test names and comments

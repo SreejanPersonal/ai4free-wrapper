@@ -3,7 +3,6 @@
 Provider_7_Testing.py
 
 A simple test script to verify streaming and non-streaming chat completions
-for Provider 7 (meow.cablyai.com)
 """
 
 import os
