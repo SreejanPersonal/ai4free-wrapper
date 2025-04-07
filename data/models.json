@@ -394,6 +394,510 @@
       "permission": [],
       "description": "DeepSeek V3 model from Provider 7",
       "owner_cost_per_million_tokens": 1.30
+    },
+    {
+      "id": "Provider-8/llama-4-maverick:free",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "llama-4-maverick:free model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/llama-4-maverick",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "llama-4-maverick model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/llama-4-scout:free",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "llama-4-scout:free model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/llama-4-scout",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "llama-4-scout model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gemini-2.5-pro-preview-03-25",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gemini-2.5-pro-preview-03-25 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/quasar-alpha",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "quasar-alpha model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/deepseek-v3-base:free",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "deepseek-v3-base:free model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/deepseek-chat-v3-0324:free",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "deepseek-chat-v3-0324:free model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/deepseek-chat-v3-0324",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "deepseek-chat-v3-0324 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/o1-pro",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "o1-pro model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/command-a",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "command-a model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4o-mini-search-preview",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4o-mini-search-preview model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4o-search-preview",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4o-search-preview model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/sonar-reasoning-pro",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "sonar-reasoning-pro model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/sonar-reasoning",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "sonar-reasoning model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/sonar-pro",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "sonar-pro model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4.5-preview",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4.5-preview model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gemini-2.0-flash-lite-001",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gemini-2.0-flash-lite-001 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.7-sonnet",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.7-sonnet model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.7-sonnet:thinking",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.7-sonnet:thinking model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.7-sonnet:beta",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.7-sonnet:beta model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/o3-mini-high",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "o3-mini-high model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gemini-2.0-flash-001",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gemini-2.0-flash-001 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gemini-2.0-pro-exp-02-05:free",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gemini-2.0-pro-exp-02-05:free model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/o3-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "o3-mini model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gemini-2.0-flash-thinking-exp:free",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gemini-2.0-flash-thinking-exp:free model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/deepseek-r1:free",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "deepseek-r1:free model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/deepseek-r1",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "deepseek-r1 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/grok-2-vision-1212",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "grok-2-vision-1212 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/grok-2-1212",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "grok-2-1212 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.5-haiku:beta",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.5-haiku:beta model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.5-haiku",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.5-haiku model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.5-haiku-20241022:beta",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.5-haiku-20241022:beta model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.5-haiku-20241022",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.5-haiku-20241022 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.5-sonnet:beta",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.5-sonnet:beta model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.5-sonnet",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.5-sonnet model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/o1-preview",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "o1-preview model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/o1-preview-2024-09-12",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "o1-preview-2024-09-12 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/o1-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "o1-mini model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/o1-mini-2024-09-12",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "o1-mini-2024-09-12 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/chatgpt-4o-latest",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "chatgpt-4o-latest model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4o-2024-08-06",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4o-2024-08-06 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4o-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4o-mini model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4o-mini-2024-07-18",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4o-mini-2024-07-18 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.5-sonnet-20240620:beta",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.5-sonnet-20240620:beta model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3.5-sonnet-20240620",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3.5-sonnet-20240620 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gemini-flash-1.5",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gemini-flash-1.5 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4o",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4o model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4o:extended",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4o:extended model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/gpt-4o-2024-05-13",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "gpt-4o-2024-05-13 model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3-haiku:beta",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3-haiku:beta model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3-haiku",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3-haiku model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3-opus:beta",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3-opus:beta model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3-opus",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3-opus model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3-sonnet:beta",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3-sonnet:beta model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-8/claude-3-sonnet",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 8",
+      "permission": [],
+      "description": "claude-3-sonnet model from Provider 8",
+      "owner_cost_per_million_tokens": 0.00
     }
   ]
 }
