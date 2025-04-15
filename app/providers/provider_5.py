@@ -83,6 +83,7 @@ class Provider5(BaseProvider):
         except Exception as e:
             log.error(f"Error loading models for Provider5: {e}")
             return []
+    
     def chat_completion(self, model_id: str, messages: list, stream: bool = False, **kwargs):
         """        
         This method handles both streaming and non-streaming requests.

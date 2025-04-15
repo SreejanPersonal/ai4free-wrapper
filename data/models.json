@@ -48,6 +48,15 @@
       "type": "image"
     },
     {
+      "id": "Provider-3/gpt-4.1-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Provider 3",
+      "permission": [],
+      "description": "GPT 4.1 Mini Model provided by the official API",
+      "owner_cost_per_million_tokens": 1.60
+    },
+    {
       "id": "Provider-4/DeepSeek-R1",
       "object": "model",
       "created": 1700000000,
@@ -898,6 +907,15 @@
       "permission": [],
       "description": "claude-3-sonnet model from Provider 8",
       "owner_cost_per_million_tokens": 0.00
+    },
+    {
+      "id": "Provider-9/gpt-4.1",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Azure",
+      "permission": [],
+      "description": "Azure OpenAI gpt-4.1 model",
+      "owner_cost_per_million_tokens": 2.00
     }
   ]
 }

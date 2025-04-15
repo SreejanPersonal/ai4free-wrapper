@@ -98,6 +98,7 @@ class Config:
 
         "Provider-3/DeepSeek-R1": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-3/o3-mini": {"max_input_tokens": 16384, "max_output_tokens": 4096},
+        "Provider-3/gpt-4.1-mini": {"max_input_tokens": 32768, "max_output_tokens": 8192},
 
         "Provider-4/DeepSeek-R1": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-4/DeepSeek-R1-Distill-Llama-70B": {"max_input_tokens": 32768, "max_output_tokens": 8192},
@@ -196,6 +197,7 @@ class Config:
         "Provider-8/claude-3-opus": {"max_input_tokens": 4000, "max_output_tokens": 4000},
         "Provider-8/claude-3-sonnet:beta": {"max_input_tokens": 4000, "max_output_tokens": 4000},
         "Provider-8/claude-3-sonnet": {"max_input_tokens": 4000, "max_output_tokens": 4000},
+        "Provider-9/gpt-4.1": {"max_input_tokens": 32768, "max_output_tokens": 4096},
     }
     @classmethod
     def get_model_config(cls, model_id):

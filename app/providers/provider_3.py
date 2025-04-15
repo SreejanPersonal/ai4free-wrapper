@@ -34,6 +34,7 @@ class Provider3(BaseProvider):
         self.alias_to_actual = {
             "Provider-3/DeepSeek-R1": "deepseek-r1",
             "Provider-3/o3-mini": "o3-mini",
+            "Provider-3/gpt-4.1-mini": "gpt-4.1-mini", # Added new model mapping
             "Provider-3/flux-1.1-ultra": "flux"  # New mapping for image generation
         }
         self.models = self._load_models()
@@ -67,6 +68,14 @@ class Provider3(BaseProvider):
                     "provider": "Provider-3",
                     "owner_cost_per_million_tokens": 8.00,  # Set appropriate cost for image generation
                     "type": "image"  # Mark this as an image model
+                },
+                {
+                    "id": "Provider-3/gpt-4.1-mini",
+                    "description": "GPT 4.1 Mini Model provided by the official API",
+                    "max_tokens": (Config.get_model_config("Provider-3/gpt-4.1-mini")["max_input_tokens"] +
+                                   Config.get_model_config("Provider-3/gpt-4.1-mini")["max_output_tokens"]),
+                    "provider": "Provider-3",
+                    "owner_cost_per_million_tokens": 1.60
                 }
             ]
         except Exception as e:
