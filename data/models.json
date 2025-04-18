@@ -84,21 +84,21 @@
       "owner_cost_per_million_tokens": 1.50
     },
     {
-      "id": "Provider-5/gpt-4o-mini",
+      "id": "Provider-5/gpt-4.1-nano",
       "object": "model",
       "created": 1700000000,
       "owned_by": "DevsDoCode",
       "permission": [],
-      "description": "GPT-4o-mini model",
+      "description": "GPT-4.1-nano model",
       "owner_cost_per_million_tokens": 0.60
     },
     {
-      "id": "Provider-5/gpt-4o",
+      "id": "Provider-5/gpt-4.1-mini",
       "object": "model",
       "created": 1700000000,
       "owned_by": "DevsDoCode",
       "permission": [],
-      "description": "GPT-4o model",
+      "description": "GPT-4.1-mini model",
       "owner_cost_per_million_tokens": 10.00
     },
     {
@@ -916,6 +916,15 @@
       "permission": [],
       "description": "Azure OpenAI gpt-4.1 model",
       "owner_cost_per_million_tokens": 2.00
+    },
+    {
+      "id": "Provider-9/o4-mini",
+      "object": "model",
+      "created": 1700000000,
+      "owned_by": "Azure",
+      "permission": [],
+      "description": "Azure OpenAI o4-mini model (Input: 32768, Output: 4096)",
+      "owner_cost_per_million_tokens": 4.40
     }
   ]
 }

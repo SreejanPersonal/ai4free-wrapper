@@ -103,9 +103,9 @@ class Config:
         "Provider-4/DeepSeek-R1": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-4/DeepSeek-R1-Distill-Llama-70B": {"max_input_tokens": 32768, "max_output_tokens": 8192},
         "Provider-4/DeepSeekV3": {"max_input_tokens": 32768, "max_output_tokens": 8192},
-        
-        "Provider-5/gpt-4o-mini": {"max_input_tokens": 8192, "max_output_tokens": 4096},
-        "Provider-5/gpt-4o": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+
+        "Provider-5/gpt-4.1-nano": {"max_input_tokens": 8192, "max_output_tokens": 4096},
+        "Provider-5/gpt-4.1-mini": {"max_input_tokens": 8192, "max_output_tokens": 4096},
         "Provider-5/o1-mini": {"max_input_tokens": 8192, "max_output_tokens": 4096},
         "Provider-5/qwen-2.5-coder-32b": {"max_input_tokens": 8192, "max_output_tokens": 4096},
         "Provider-5/llama-3.3-70b": {"max_input_tokens": 8192, "max_output_tokens": 4096},
@@ -198,9 +198,20 @@ class Config:
         "Provider-8/claude-3-sonnet:beta": {"max_input_tokens": 4000, "max_output_tokens": 4000},
         "Provider-8/claude-3-sonnet": {"max_input_tokens": 4000, "max_output_tokens": 4000},
         "Provider-9/gpt-4.1": {"max_input_tokens": 32768, "max_output_tokens": 4096},
+        "Provider-9/o4-mini": {"max_input_tokens": 32768, "max_output_tokens": 4000},
     }
     @classmethod
     def get_model_config(cls, model_id):
+        # First, try to get configuration from the loaded models list
+        for model_data in cls.ALLOWED_MODELS:
+            if model_data["id"] == model_id:
+                return {
+                    "max_input_tokens": model_data.get("max_input_tokens", cls.MAX_INPUT_TOKENS),
+                    "max_output_tokens": model_data.get("max_output_tokens", cls.MAX_OUTPUT_TOKENS),
+                    "owner_cost_per_million_tokens": model_data.get("owner_cost_per_million_tokens")
+                }
+
+        # If not found in the loaded models, fall back to the hardcoded config
         return cls.MODEL_SPECIFIC_CONFIG.get(model_id, {
             "max_input_tokens": cls.MAX_INPUT_TOKENS,
             "max_output_tokens": cls.MAX_OUTPUT_TOKENS,
@@ -209,6 +220,11 @@ class Config:
     MODEL_LIST_PATH = 'data/models.json'
     TOKEN_ENCODING = 'cl100k_base'
     ALLOWED_MODELS = []
+
+    @classmethod
+    def get_models_config(cls):
+        """Returns the raw list of models loaded from the JSON file."""
+        return cls.ALLOWED_MODELS
 
     @classmethod
     def load_models(cls):

@@ -96,8 +96,8 @@ def test_provider_5_models():
     """
     # List of supported models for Provider 5
     models = [
-        "Provider-5/gpt-4o-mini",
-        "Provider-5/gpt-4o",
+        "Provider-5/gpt-4.1-nano",
+        "Provider-5/gpt-4.1-mini",
         "Provider-5/o1-mini",
         "Provider-5/qwen-2.5-coder-32b",
         "Provider-5/llama-3.3-70b",
@@ -122,7 +122,7 @@ def test_provider_5_models():
 
 if __name__ == "__main__":
     # Test with a specific model
-    model = "Provider-5/gpt-4o"
+    model = "Provider-5/gpt-4.1-mini"
     
     print_separator()
     print_section_header(f"PROVIDER 5 TESTING: {model}")

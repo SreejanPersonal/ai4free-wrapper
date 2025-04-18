@@ -28,8 +28,8 @@ class Provider5(BaseProvider):
         }
         
         self.alias_to_actual = {
-            "Provider-5/gpt-4o-mini": "openai",
-            "Provider-5/gpt-4o": "openai-large",
+            "Provider-5/gpt-4.1-nano": "openai",
+            "Provider-5/gpt-4.1-mini": "openai-large",
             "Provider-5/o1-mini": "openai-reasoning",
             "Provider-5/qwen-2.5-coder-32b": "qwen-coder",
             "Provider-5/llama-3.3-70b": "llama",

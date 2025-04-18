@@ -37,7 +37,7 @@ client = OpenAI(
     base_url=f"{LOCAL_API_URL}/v1"
 )
 
-MODEL_ID = "Provider-9/gpt-4.1"
+MODEL_ID = "Provider-9/o4-mini"
 
 def test_non_streaming(model_id=MODEL_ID):
     """Tests non-streaming completion."""
